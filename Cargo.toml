@@ -1,0 +1,13 @@
+[workspace]
+members = [
+  "day-*",
+  "util",
+]
+
+resolver = "2"
+
+[workspace.dependencies]
+anyhow = "1.0"
+itertools = "0.13"
+atoi = "2.0"
+memmap2 = "0.9"
