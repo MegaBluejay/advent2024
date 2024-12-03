@@ -73,21 +73,27 @@ fn main() -> Result<()> {
         fn get_safe2(dists: &[i64]) -> bool {
             let first = Comp::from(dists[0]);
             let rm_first = check(dists[1..].iter().copied());
+            if rm_first {
+                return true;
+            }
             let Some((i, _)) = dists
                 .iter()
                 .copied()
                 .map(Comp::from)
                 .find_position(|c| *c != first)
             else {
-                return rm_first;
+                return false;
             };
             let before = check(merge(dists, i - 1));
+            if before {
+                return true;
+            }
             let after = if i == dists.len() - 1 {
                 check(dists[..dists.len() - 1].iter().copied())
             } else {
                 check(merge(dists, i))
             };
-            rm_first || before || after
+            after
         }
 
         if safe1 {
