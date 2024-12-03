@@ -57,10 +57,10 @@ name = "day-3"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "atoi",
  "itertools",
  "memmap2",
  "regex",
+ "util",
 ]
 
 [[package]]

@@ -8,4 +8,4 @@ anyhow.workspace = true
 itertools.workspace = true
 memmap2.workspace = true
 regex.workspace = true
-atoi.workspace = true
+util.path = "../util"
