@@ -18,7 +18,7 @@ fn main() -> Result<()> {
         if &input[..4] == b"mul(" {
             if let Ok((a, b, rest)) = atoi_with_rest::<u64>(&input[4..]).and_then(|(a, rest)| {
                 let (b, rest) = atoi_with_rest::<u64>(&rest[1..])?;
-                if rest.is_empty() || rest[0] != ')' as u8 {
+                if rest.is_empty() || rest[0] != b')' {
                     Err(anyhow!("no )"))
                 } else {
                     Ok((a, b, rest))

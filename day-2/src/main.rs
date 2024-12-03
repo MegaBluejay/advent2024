@@ -17,7 +17,7 @@ fn main() -> Result<()> {
     let mut ans2 = 0;
 
     loop {
-        if input.is_empty() || input[0] == '\n' as u8 {
+        if input.is_empty() || input[0] == b'\n' {
             break;
         }
 
@@ -29,7 +29,7 @@ fn main() -> Result<()> {
             }
             prev = Some(level);
             input = &rest[1..];
-            if rest[0] == '\n' as u8 {
+            if rest[0] == b'\n' {
                 break;
             }
         }

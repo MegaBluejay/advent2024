@@ -16,7 +16,7 @@ fn main() -> Result<()> {
     let mut input = &input_all[..];
 
     loop {
-        if input.is_empty() || input[0] == '\n' as u8 {
+        if input.is_empty() || input[0] == b'\n' {
             break;
         }
         let (a, rest) = atoi_with_rest(input)?;
