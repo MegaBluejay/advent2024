@@ -7,5 +7,4 @@ edition = "2021"
 anyhow.workspace = true
 itertools.workspace = true
 memmap2.workspace = true
-regex.workspace = true
 util.path = "../util"
