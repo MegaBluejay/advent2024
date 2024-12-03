@@ -1,7 +1,7 @@
 use std::{env, fs::File, iter::once};
 
-use anyhow::{Context, Result};
-use itertools::Itertools;
+use anyhow::{Context as _, Result};
+use itertools::Itertools as _;
 use memmap2::Mmap;
 use util::atoi_with_rest;
 
@@ -23,7 +23,7 @@ fn main() -> Result<()> {
 
         let mut prev: Option<i64> = None;
         loop {
-            let (level, rest) = atoi_with_rest(input)?;
+            let (level, rest) = atoi_with_rest(input).context("invalid int")?;
             if let Some(prev) = prev {
                 dists.push(level - prev);
             }

@@ -1,6 +1,6 @@
 use std::{env, fs::File};
 
-use anyhow::{anyhow, Context, Result};
+use anyhow::{Context as _, Result};
 use memmap2::Mmap;
 use util::atoi_with_rest;
 
@@ -16,12 +16,12 @@ fn main() -> Result<()> {
 
     while input.len() >= 4 {
         if &input[..4] == b"mul(" {
-            if let Ok((a, b, rest)) = atoi_with_rest::<u64>(&input[4..]).and_then(|(a, rest)| {
+            if let Some((a, b, rest)) = atoi_with_rest::<u64>(&input[4..]).and_then(|(a, rest)| {
                 let (b, rest) = atoi_with_rest::<u64>(&rest[1..])?;
                 if rest.is_empty() || rest[0] != b')' {
-                    Err(anyhow!("no )"))
+                    None
                 } else {
-                    Ok((a, b, rest))
+                    Some((a, b, rest))
                 }
             }) {
                 let res = a * b;

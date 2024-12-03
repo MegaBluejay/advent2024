@@ -19,8 +19,8 @@ fn main() -> Result<()> {
         if input.is_empty() || input[0] == b'\n' {
             break;
         }
-        let (a, rest) = atoi_with_rest(input)?;
-        let (b, rest) = atoi_with_rest(&rest[3..])?;
+        let (a, rest) = atoi_with_rest(input).context("invalid int")?;
+        let (b, rest) = atoi_with_rest(&rest[3..]).context("invalid int")?;
         ass.push(a);
         bss.push(b);
         input = &rest[1..];
