@@ -17,19 +17,21 @@ fn main() -> Result<()> {
     while input.len() >= 4 {
         if &input[..4] == b"mul(" {
             if let Some((a, b, rest)) = atoi_with_rest::<u64>(&input[4..]).and_then(|(a, rest)| {
+                if rest.is_empty() || rest[0] != b',' {
+                    return None;
+                }
                 let (b, rest) = atoi_with_rest::<u64>(&rest[1..])?;
                 if rest.is_empty() || rest[0] != b')' {
-                    None
-                } else {
-                    Some((a, b, rest))
+                    return None;
                 }
+                Some((a, b, &rest[1..]))
             }) {
                 let res = a * b;
                 ans1 += res;
                 if enabled {
                     ans2 += res;
                 }
-                input = &rest[1..];
+                input = rest;
             } else {
                 input = &input[4..];
             }
