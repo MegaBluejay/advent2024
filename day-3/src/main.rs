@@ -10,7 +10,7 @@ fn main() -> Result<()> {
     let file = File::open(filename)?;
     let input = unsafe { Mmap::map(&file)? };
 
-    let re = Regex::new(r"mul\(\d+,\d+\)|do\(\)|don't\(\)")?;
+    let re = Regex::new(r"mul\(\d{1,3},\d+{1,3}\)|do\(\)|don't\(\)")?;
 
     let mut ans1: u64 = 0;
     let mut ans2: u64 = 0;
