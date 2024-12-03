@@ -76,6 +76,10 @@ fn main() -> Result<()> {
             if rm_first {
                 return true;
             }
+            let merge_first = check(merge(dists, 0));
+            if merge_first {
+                return true;
+            }
             let Some((i, _)) = dists
                 .iter()
                 .copied()
