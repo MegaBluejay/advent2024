@@ -48,7 +48,6 @@ name = "day-3"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "itertools",
  "memmap2",
  "util",
 ]
