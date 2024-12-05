@@ -1,4 +1,4 @@
-use std::{env, fs::File};
+use std::{cmp::Ordering, collections::HashSet, env, fs::File};
 
 use anyhow::{Context as _, Result};
 use memmap2::Mmap;
@@ -11,11 +11,11 @@ fn main() -> Result<()> {
 
     let mut input = &input_all[..];
 
-    let mut rules = vec![vec![]; 10_000];
+    let mut rules = HashSet::new();
     while input[0] != b'\n' {
         let (a, rest) = atoi_with_rest::<u16>(input).context("invalid int")?;
         let (b, rest) = atoi_with_rest::<u16>(&rest[1..]).context("invalid int")?;
-        rules[a as usize].push(b);
+        rules.insert((a, b));
         input = &rest[1..];
     }
 
@@ -23,53 +23,31 @@ fn main() -> Result<()> {
 
     let mut ans1 = 0;
     let mut ans2 = 0;
-    let mut original = vec![];
-    let mut incoming = vec![100_000; 10_000];
-    let mut stack = Vec::new();
-    let mut out = Vec::new();
+    let mut update = vec![];
 
     while !input.is_empty() {
-        original.clear();
-        stack.clear();
-        out.clear();
+        update.clear();
         loop {
             let (x, rest) = atoi_with_rest::<u16>(input).context("invalid int")?;
-            original.push(x);
-            incoming[x as usize] = 0;
+            update.push(x);
             input = &rest[1..];
             if rest[0] == b'\n' {
                 break;
             }
         }
-        for a in &original {
-            for b in &rules[*a as usize] {
-                incoming[*b as usize] += 1;
-            }
-        }
-        for a in &original {
-            if incoming[*a as usize] == 0 {
-                stack.push(*a);
-            }
-        }
-        while let Some(a) = stack.pop() {
-            out.push(a);
-            for b in &rules[a as usize] {
-                incoming[*b as usize] -= 1;
-                if incoming[*b as usize] == 0 {
-                    stack.push(*b);
-                }
-            }
-        }
-
-        let mid = out[(out.len() - 1) / 2] as u64;
-        if original == out {
-            ans1 += mid;
+        let sorted = update.is_sorted_by(|&a, &b| rules.contains(&(a, b)));
+        let mid = update.len() / 2;
+        if sorted {
+            ans1 += update[mid];
         } else {
-            ans2 += mid;
-        }
-
-        for a in &original {
-            incoming[*a as usize] = 100_000;
+            let (_, &mut val, _) = update.select_nth_unstable_by(mid, |&a, &b| {
+                if rules.contains(&(a, b)) {
+                    Ordering::Less
+                } else {
+                    Ordering::Equal
+                }
+            });
+            ans2 += val;
         }
     }
 
