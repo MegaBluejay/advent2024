@@ -84,7 +84,7 @@ fn main() -> Result<()> {
                 .iter()
                 .copied()
                 .map(Comp::from)
-                .find_position(|c| *c != first)
+                .find_position(|&c| c != first)
             else {
                 return false;
             };

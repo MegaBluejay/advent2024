@@ -29,7 +29,7 @@ fn main() -> Result<()> {
     ass.sort();
     bss.sort();
 
-    let ans1: u64 = ass.iter().zip(&bss).map(|(a, b)| a.abs_diff(*b)).sum();
+    let ans1: u64 = ass.iter().zip(&bss).map(|(&a, &b)| a.abs_diff(b)).sum();
 
     let mut j = 0;
     let mut ans2 = 0;
