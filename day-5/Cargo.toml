@@ -6,4 +6,5 @@ edition = "2021"
 [dependencies]
 anyhow.workspace = true
 memmap2.workspace = true
+ahash.workspace = true
 util.path = "../util"

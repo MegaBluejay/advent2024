@@ -1,5 +1,6 @@
-use std::{cmp::Ordering, collections::HashSet, env, fs::File};
+use std::{cmp::Ordering, env, fs::File};
 
+use ahash::{HashSet, HashSetExt as _};
 use anyhow::{Context as _, Result};
 use memmap2::Mmap;
 use util::atoi_with_rest;
