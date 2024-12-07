@@ -1,0 +1,10 @@
+[package]
+name = "day-6"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow.workspace = true
+memmap2.workspace = true
+itertools.workspace = true
+ahash.workspace = true
