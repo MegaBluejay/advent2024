@@ -1,0 +1,9 @@
+[package]
+name = "day-7"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow.workspace = true
+memmap2.workspace = true
+util.path = "../util"
